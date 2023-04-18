@@ -6,7 +6,7 @@ class WpPlugin {
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_get_records', array( $this, 'get_records' ) );
-		add_action( 'wp_ajax_nopriv_oldest_posts', array( $this, 'get_records' ) );
+		add_action( 'wp_ajax_nopriv_get_records', array( $this, 'get_records' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 /*
@@ -54,10 +54,10 @@ class WpPlugin {
 	 * Frontend java script upload function
 	 */
 	private function registerScript(){
-		wp_enqueue_script( 'test-plugin', plugin_dir_url( __FILE__ ) . 'public/js/test-plugin.js', array( 'jquery' ), '1.0', true );
-		wp_localize_script( 'test-plugin', 'oldestPostsAjax', array(
+		wp_enqueue_script( 'Wpplugin', plugin_dir_url( __FILE__ ) . 'public/js/test-plugin.js', array( 'jquery' ), '1.0', true );
+		wp_localize_script( 'Wpplugin', 'getRecords', array(
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-			'nonce'   => wp_create_nonce( 'oldest_posts_nonce' ),
+			'nonce'   => wp_create_nonce( 'get_records_nonce' ),
 		) );
 	}
 }
